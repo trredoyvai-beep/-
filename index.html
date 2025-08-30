@@ -1,0 +1,1086 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ছাত্র ভর্তি / রেজিস্ট্রেশন ফর্ম</title>
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --ring:#2563eb; --danger:#dc2626; --ok:#16a34a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif; background:var(--bg); color:var(--text)}
+    .container{max-width:1024px; margin:32px auto; padding:0 16px}
+    .header{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px}
+    h1{font-size:1.5rem; margin:0}
+    .card{background:var(--card); border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 4px 16px rgba(2,6,23,.04);}
+    .card-header{padding:16px 20px; border-bottom:1px solid #eef2f7; display:flex; gap:12px; align-items:center}
+    .card-body{padding:20px}
+    .grid{display:grid; gap:12px}
+    @media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)} .grid-3{grid-template-columns:repeat(3,1fr)}}
+    label{font-size:.9rem; color:var(--muted); display:block; margin-bottom:6px}
+    input, select, textarea{width:100%; border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; font:inherit; background:#fff}
+    input:focus, select:focus, textarea:focus{outline:none; border-color:var(--ring); box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+    .row{display:flex; gap:10px}
+    .hint{font-size:.8rem; color:var(--muted)}
+    .req{color:var(--danger)}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    button{border:0; border-radius:12px; padding:10px 14px; font-weight:600; cursor:pointer}
+    .btn-primary{background:var(--ring); color:#fff}
+    .btn-muted{background:#e5e7eb}
+    .btn-danger{background:var(--danger); color:#fff}
+    .pill{display:inline-flex; align-items:center; gap:8px; background:#eef2ff; color:#3730a3; padding:6px 10px; border-radius:999px; font-size:.85rem}
+    .inline{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .preview{display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:center}
+    .avatar{width:120px; height:120px; border-radius:12px; border:1px dashed #cbd5e1; object-fit:cover; background:#fafafa}
+    .error{color:var(--danger); font-size:.85rem; margin-top:4px}
+    .success{border:1px solid #dcfce7; background:#f0fdf4; color:#14532d; padding:10px 12px; border-radius:12px; margin-top:10px}
+    .danger{border:1px solid #fee2e2; background:#fef2f2; color:#7f1d1d; padding:10px 12px; border-radius:12px; margin-top:10px}
+    .section-title{font-weight:700; margin:16px 0 6px}
+    .divider{height:1px; background:#eef2f7; margin:12px 0}
+    .jsonbox{background:#0b1020; color:#e5e7eb; padding:12px; border-radius:12px; overflow:auto; max-height:260px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>জামিয়া সালাফিয়া রাজশাহী — ছাত্র ভর্তি / রেজিস্ট্রেশন</h1>
+      <span class="pill" id="studentIdPill">ID: খালি</span>
+    </div><div class="card">
+  <div class="card-header">
+    <strong>ভর্তি ফর্ম</strong>
+    <span class="hint">(শুধু ফ্রন্টএন্ড—ডেটা লোকালি সংরক্ষণ হবে; পরে ব্যাকএন্ডে পাঠাবেন)</span>
+  </div>
+  <div class="card-body">
+    <form id="admissionForm" novalidate>
+      <div class="grid grid-3">
+        <div>
+          <label>ছাত্রের নাম <span class="req">*</span></label>
+          <input type="text" name="student_name" required placeholder="উদাহরণ: আব্দুল্লাহ আল নোমান" />
+        </div>
+        <div>
+          <label>নামের (ইংরেজি)</label>
+          <input type="text" name="student_name_en" placeholder="Abdullah Al Noman" />
+        </div>
+        <div>
+          <label>লিঙ্গ <span class="req">*</span></label>
+          <select name="gender" required>
+            <option value="">নির্বাচন করুন</option>
+            <option>পুরুষ</option>
+            <option>মহিলা</option>
+            <option>অন্যান্য</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:8px">
+        <div>
+          <label>শ্রেণি <span class="req">*</span></label>
+          <select name="class" required>
+            <option value="">নির্বাচন করুন</option>
+            <option>হিফজ</option>
+            <option>তাহফিজ</option>
+            <option>সনাতনী ১ম</option>
+            <option>সনাতনী ২য়</option>
+            <option>দাওরায়ে হাদীস</option>
+          </select>
+        </div>
+        <div>
+          <label>সেকশন</label>
+          <input type="text" name="section" placeholder="উদাহরণ: A / B" />
+        </div>
+        <div>
+          <label>রোল নম্বর</label>
+          <input type="text" name="roll" inputmode="numeric" placeholder="যদি থাকে" />
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:8px">
+        <div>
+          <label>জন্ম তারিখ <span class="req">*</span></label>
+          <input type="date" name="dob" required />
+        </div>
+        <div>
+          <label>রক্তের গ্রুপ</label>
+          <select name="blood_group">
+            <option value="">—</option>
+            <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+        <div>
+          <label>ধর্ম</label>
+          <input type="text" name="religion" placeholder="ইসলাম" />
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:8px">
+        <div>
+          <label>ছাত্রের মোবাইল</label>
+          <input type="tel" name="student_phone" pattern="^\d{11}$" placeholder="১১ ডিজিট (বাংলাদেশ)" />
+          <div class="hint">উদাহরণ: 01XXXXXXXXX</div>
+        </div>
+        <div>
+          <label>ইমেইল</label>
+          <input type="email" name="email" placeholder="example@mail.com" />
+        </div>
+        <div>
+          <label>জেলা</label>
+          <input type="text" name="district" placeholder="রাজশাহী" />
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:8px">
+        <div>
+          <label>অভিভাবকের নাম <span class="req">*</span></label>
+          <input type="text" name="guardian_name" required />
+        </div>
+        <div>
+          <label>অভিভাবকের মোবাইল <span class="req">*</span></label>
+          <input type="tel" name="guardian_phone" required pattern="^\d{11}$" placeholder="01XXXXXXXXX" />
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:8px">
+        <div>
+          <label>বর্তমান ঠিকানা <span class="req">*</span></label>
+          <textarea name="present_address" rows="2" required></textarea>
+        </div>
+        <div>
+          <label>স্থায়ী ঠিকানা</label>
+          <textarea name="permanent_address" rows="2"></textarea>
+        </div>
+      </div>
+
+      <div class="section-title">ছবি আপলোড</div>
+      <div class="grid grid-2">
+        <div class="preview">
+          <img id="photoPreview" class="avatar" alt="Photo preview" />
+          <div>
+            <label>ছাত্রের ছবি (JPG/PNG, সর্বোচ্চ 1 MB) <span class="req">*</span></label>
+            <input type="file" name="photo" id="photo" accept="image/jpeg,image/png" required />
+            <div class="hint">স্পষ্ট পাসপোর্ট সাইজ ছবি দিন</div>
+            <div id="photoError" class="error" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary">ফর্ম সাবমিট</button>
+        <button type="button" id="saveDraft" class="btn-muted">ড্রাফট সেভ (লোকাল)</button>
+        <button type="reset" class="btn-danger">রিসেট</button>
+        <span class="hint">সাবমিট করলে নিচে ডেটা JSON আকারে দেখাবে।</span>
+      </div>
+
+      <div id="message"></div>
+
+      <div style="margin-top:16px">
+        <div class="section-title">সাবমিটেড ডেটা (JSON প্রিভিউ)</div>
+        <pre id="jsonPreview" class="jsonbox">{}</pre>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <div class="card-header"><strong>ইন্টিগ্রেশন নোট</strong></div>
+  <div class="card-body">
+    <p class="hint">ব্যাকএন্ড যুক্ত করার সময় নিচের মত করে <code>fetch</code> ব্যবহার করতে পারবেন।</p>
+
+<pre class="jsonbox">// উদাহরণ (POST):
+fetch('/api/students', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+}).then(r => r.json()).then(data => {
+  console.log('Saved', data)
+})
+.catch(console.error)</pre></div>
+</div>
+
+  </div>  <script>
+    // ---- Utilities ----
+    function generateStudentId(){
+      const year = new Date().getFullYear();
+      const key = 'salafia_id_seq_' + year;
+      const seq = Number(localStorage.getItem(key) || '0') + 1;
+      localStorage.setItem(key, String(seq));
+      const id = `SALAFIA-${year}-${String(seq).padStart(4,'0')}`;
+      document.getElementById('studentIdPill').textContent = 'ID: ' + id;
+      return id;
+    }
+
+    function readForm(form){
+      const fd = new FormData(form);
+      const out = Object.fromEntries(fd.entries());
+      // normalize phones
+      if(out.student_phone) out.student_phone = out.student_phone.replace(/\D/g,'');
+      if(out.guardian_phone) out.guardian_phone = out.guardian_phone.replace(/\D/g,'');
+      return out;
+    }
+
+    function validatePhoto(file){
+      const errEl = document.getElementById('photoError');
+      errEl.style.display = 'none';
+      if(!file) { errEl.textContent = 'ছবি আবশ্যক'; errEl.style.display='block'; return false; }
+      const okType = ['image/jpeg','image/png'].includes(file.type);
+      const okSize = file.size <= 1024*1024; // 1MB
+      if(!okType){ errEl.textContent = 'শুধু JPG বা PNG দিন'; errEl.style.display='block'; return false; }
+      if(!okSize){ errEl.textContent = 'ছবির সাইজ 1MB এর কম হতে হবে'; errEl.style.display='block'; return false; }
+      return true;
+    }
+
+    function showMessage(html, type='success'){
+      const msg = document.getElementById('message');
+      msg.className = type === 'success' ? 'success' : 'danger';
+      msg.innerHTML = html;
+    }
+
+    function updatePreview(obj){
+      document.getElementById('jsonPreview').textContent = JSON.stringify(obj, null, 2);
+    }
+
+    // ---- Photo preview ----
+    const photoInput = document.getElementById('photo');
+    const photoPreview = document.getElementById('photoPreview');
+    photoInput.addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(file && validatePhoto(file)){
+        const url = URL.createObjectURL(file);
+        photoPreview.src = url;
+      } else {
+        photoPreview.removeAttribute('src');
+      }
+    });
+
+    // ---- Form submission ----
+    const form = document.getElementById('admissionForm');
+    let currentId = generateStudentId();
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+
+      // HTML5 validation first
+      if(!form.checkValidity()){
+        showMessage('অনুগ্রহ করে সব আবশ্যক ঘর পূরণ করুন।', 'danger');
+        form.reportValidity();
+        return;
+      }
+
+      const file = photoInput.files[0];
+      if(!validatePhoto(file)) { showMessage('ছবির সমস্যা ঠিক করুন।', 'danger'); return; }
+
+      const data = readForm(form);
+      data.student_id = currentId;
+      data.submitted_at = new Date().toISOString();
+
+      // NOTE: Image file পাঠাতে হলে পরে FormData + multipart ব্যবহার করবেন। এখানে ডেমো হিসেবে base64 দেখানো হলো।
+      const reader = new FileReader();
+      reader.onload = function(){
+        data.photo_base64 = reader.result; // demo only (backend এ নিরাপদভাবে হ্যান্ডেল করবেন)
+        updatePreview(data);
+        showMessage('ফর্ম সফলভাবে সাবমিট হয়েছে (ডেমো)। এখন ব্যাকএন্ড যুক্ত করে ডেটা সংরক্ষণ করুন।');
+
+        // Demo: লোকালস্টোরেজে সেভ
+        const all = JSON.parse(localStorage.getItem('salafia_students') || '[]');
+        all.push(data);
+        localStorage.setItem('salafia_students', JSON.stringify(all));
+
+        // পরবর্তীতে আপনি এখানে fetch(...) করে ব্যাকএন্ডে POST করবেন।
+      }
+      reader.readAsDataURL(file);
+    });
+
+    // ---- Save Draft (local) ----
+    document.getElementById('saveDraft').addEventListener('click', ()=>{
+      const partial = readForm(form);
+      partial.student_id = currentId;
+      partial.draft = true;
+      const drafts = JSON.parse(localStorage.getItem('salafia_drafts') || '[]');
+      drafts.push(partial);
+      localStorage.setItem('salafia_drafts', JSON.stringify(drafts));
+      updatePreview(partial);
+      showMessage('ড্রাফট লোকালি সেভ হয়েছে। পরে পূরণ করে সাবমিট করুন।');
+    });
+
+    // ---- Reset behavior ----
+    form.addEventListener('reset', ()=>{
+      setTimeout(()=>{
+        currentId = generateStudentId();
+        document.getElementById('jsonPreview').textContent = '{}';
+        document.getElementById('message').className='';
+        document.getElementById('message').textContent='';
+        photoPreview.removeAttribute('src');
+        document.getElementById('photoError').style.display='none';
+      }, 0);
+    });
+  </script></body>
+</html>
+
+
+
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>শিক্ষক ও কর্মচারী ডাটাবেস — Demo</title>
+  <style>
+    :root{--bg:#f6f7fb; --card:#fff; --muted:#64748b; --ring:#2563eb}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:#0f172a}
+    .container{max-width:1100px; margin:28px auto; padding:0 16px}
+    .card{background:var(--card); border:1px solid #e6eef6; border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,.04)}
+    .card-header{padding:14px 18px; border-bottom:1px solid #eef2f7; font-weight:700}
+    .card-body{padding:16px}
+    input,select,textarea,button{font:inherit}
+    .btn-primary{background:var(--ring); color:#fff; border:0; padding:8px 12px; border-radius:10px; cursor:pointer}
+    .btn-muted{background:#eef2f7; border:0; padding:8px 12px; border-radius:10px; cursor:pointer}
+    table{width:100%; border-collapse:collapse; margin-top:12px}
+    th,td{padding:10px; border-bottom:1px solid #f1f5f9; text-align:left}
+    /* modal */
+    #modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,23,.45); z-index:60}
+    #modal .box{background:#fff; width:720px; max-width:95%; border-radius:10px; padding:16px}
+    label{display:block; font-size:.9rem; color:var(--muted); margin-bottom:6px}
+    input[type="text"], select, textarea{width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .cards-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; margin-top:12px}
+    .card-mini{background:#fff; border:1px solid #eef2f7; border-radius:10px; padding:12px}
+    .small-btn{padding:6px 8px; border-radius:8px; cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">শিক্ষক ও কর্মচারী ডাটাবেস</div>
+      <div class="card-body">
+        <div style="display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap">
+          <div style="display:flex; gap:8px; align-items:center">
+            <input id="searchInput" placeholder="খুঁজুন: নাম/বিষয়/মোবাইল" style="padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb" />
+            <select id="filterRole" style="padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb">
+              <option value="">সকল</option>
+              <option value="teacher">শিক্ষক</option>
+              <option value="staff">কর্মচারী</option>
+            </select>
+          </div>
+          <div style="display:flex; gap:8px">
+            <button id="addTeacherBtn" class="btn-primary">নতুন যোগ করুন</button>
+            <button id="exportBtn" class="btn-muted">Export JSON</button>
+          </div>
+        </div>
+
+        <table id="teachersTable" aria-live="polite">
+          <thead>
+            <tr>
+              <th>ID</th><th>নাম</th><th>পদ</th><th>বিষয়</th><th>মোবাইল</th><th>অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="teachersTbody"></tbody>
+        </table>
+
+        <div class="cards-grid" id="cardsGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="box">
+      <h3 style="margin:0 0 8px">শিক্ষক / কর্মচারী তথ্য</h3>
+      <form id="teacherForm">
+        <input type="hidden" name="id" />
+        <div class="grid-2">
+          <div>
+            <label>নাম</label>
+            <input name="name" required />
+          </div>
+          <div>
+            <label>পদ</label>
+            <select name="role" required>
+              <option value="teacher">শিক্ষক</option>
+              <option value="staff">কর্মচারী</option>
+            </select>
+          </div>
+          <div>
+            <label>বিষয় / দায়িত্ব</label>
+            <input name="subject" />
+          </div>
+          <div>
+            <label>মোবাইল</label>
+            <input name="phone" placeholder="01XXXXXXXXX" />
+          </div>
+          <div style="grid-column:1/3">
+            <label>বিবরণ</label>
+            <textarea name="notes" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px">
+          <button type="button" id="cancelModal" class="btn-muted">বাতিল</button>
+          <button type="submit" class="btn-primary">সেভ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Frontend-only teacher/staff manager (uses localStorage). Replace TODOs with fetch() when backend available.
+    const STORAGE_KEY = 'salafia_teachers_v1';
+
+    function genId(prefix='T'){ return prefix + '-' + Date.now().toString(36).toUpperCase().slice(-6); }
+    function loadTeachers(){ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    function saveTeachers(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
+    function initials(name){ if(!name) return 'NA'; return name.split(' ').map(x=>x[0]||'').slice(0,2).join('').toUpperCase(); }
+
+    function renderTable(list){
+      const tbody = document.getElementById('teachersTbody'); tbody.innerHTML = '';
+      list.forEach(t => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${t.id}</td>
+          <td>${escapeHtml(t.name)}</td>
+          <td>${t.role}</td>
+          <td>${escapeHtml(t.subject||'—')}</td>
+          <td>${escapeHtml(t.phone||'—')}</td>
+          <td>
+            <button data-id="${t.id}" class="small-btn editBtn">Edit</button>
+            <button data-id="${t.id}" class="small-btn" style="background:#fee2e2;border:0;border-radius:6px" data-del="${t.id}">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // cards view
+      const grid = document.getElementById('cardsGrid'); grid.innerHTML = '';
+      list.forEach(t => {
+        const div = document.createElement('div');
+        div.className = 'card-mini';
+        div.innerHTML = `
+          <div style="display:flex; gap:10px; align-items:center">
+            <div style="width:56px; height:56px; border-radius:8px; background:#eef2f7; display:flex; align-items:center; justify-content:center; font-weight:700">
+              ${initials(t.name)}
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:700">${escapeHtml(t.name)}</div>
+              <div style="color:#64748b; font-size:.9rem">${t.role} — ${escapeHtml(t.subject||'—')}</div>
+            </div>
+            <div style="text-align:right; font-weight:700">${escapeHtml(t.phone||'—')}</div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+
+      // attach actions
+      document.querySelectorAll('.editBtn').forEach(b => b.addEventListener('click', ()=> openEdit(b.dataset.id)));
+      document.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', ()=> deleteItem(b.getAttribute('data-del'))));
+    }
+
+    function openModal(){ document.getElementById('modal').style.display = 'flex'; }
+    function closeModal(){ document.getElementById('modal').style.display = 'none'; document.getElementById('teacherForm').reset(); }
+
+    function openEdit(id){
+      const list = loadTeachers(); const t = list.find(x=>x.id===id); if(!t) return;
+      openModal();
+      const f = document.forms['teacherForm'];
+      f.id.value = t.id; f.name.value = t.name; f.role.value = t.role; f.subject.value = t.subject || ''; f.phone.value = t.phone || ''; f.notes.value = t.notes || '';
+    }
+
+    function deleteItem(id){
+      if(!confirm('আপনি কি এই আইটেম মুছে ফেলতে চান?')) return;
+      let list = loadTeachers(); list = list.filter(x => x.id !== id); saveTeachers(list); renderTable(list);
+      // TODO: call backend DELETE endpoint if available
+      // fetch(`/api/staff/${id}`, { method: 'DELETE' })
+    }
+
+    // init
+    (function init(){
+      if(!localStorage.getItem(STORAGE_KEY)){
+        saveTeachers([
+          {id:genId('T'), name:'মুহাম্মাদ জামিল', role:'teacher', subject:'আল-ফিকহ', phone:'01710000001', notes:'প্রধান শিক্ষক'},
+          {id:genId('S'), name:'রফিকুল ইসলাম', role:'staff', subject:'কেয়ারটেকার', phone:'01710000002', notes:''}
+        ]);
+      }
+      renderTable(loadTeachers());
+
+      document.getElementById('addTeacherBtn').addEventListener('click', ()=> openModal());
+      document.getElementById('cancelModal').addEventListener('click', ()=> closeModal());
+
+      document.getElementById('teacherForm').addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const f = e.target;
+        const obj = {
+          id: f.id.value || genId(f.role.value==='staff'?'S':'T'),
+          name: f.name.value.trim(),
+          role: f.role.value,
+          subject: f.subject.value.trim(),
+          phone: f.phone.value.replace(/\D/g,''),
+          notes: f.notes.value.trim()
+        };
+        const list = loadTeachers(); const idx = list.findIndex(x=>x.id===obj.id);
+        if(idx >= 0) list[idx] = obj; else list.push(obj);
+        saveTeachers(list); renderTable(list); closeModal();
+
+        // TODO: replace with backend POST/PUT
+        // fetch('/api/staff', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj) })
+      });
+
+      document.getElementById('searchInput').addEventListener('input', applyFilter);
+      document.getElementById('filterRole').addEventListener('change', applyFilter);
+
+      document.getElementById('exportBtn').addEventListener('click', ()=>{
+        const data = loadTeachers();
+        const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'salafia_teachers.json'; a.click(); URL.revokeObjectURL(url);
+      });
+    })();
+
+    function applyFilter(){
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const role = document.getElementById('filterRole').value;
+      let list = loadTeachers();
+      if(role) list = list.filter(x => x.role === role);
+      if(q) list = list.filter(x => (x.name||'').toLowerCase().includes(q) || (x.subject||'').toLowerCase().includes(q) || (x.phone||'').includes(q));
+      renderTable(list);
+    }
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>টিউশন ফি / ফান্ড কালেকশন সিস্টেম</title>
+  <style>
+    body {font-family: system-ui, sans-serif; margin: 0; background: #f6f7fb; color: #0f172a;}
+    .container {max-width: 1024px; margin: 32px auto; padding: 0 16px;}
+    h1 {font-size: 1.5rem; margin-bottom: 16px;}
+    table {width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    th, td {padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb;}
+    th {background: #f1f5f9; font-weight: 600; color: #334155;}
+    tr:hover {background: #f9fafb;}
+    .actions {display: flex; gap: 8px;}
+    button {border: 0; border-radius: 8px; padding: 6px 10px; font-size: 0.9rem; cursor: pointer;}
+    .btn-delete {background: #dc2626; color: #fff;}
+    .add-form {margin: 20px 0; background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    label {display: block; font-size: 0.9rem; color: #475569; margin-bottom: 4px;}
+    input {width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 10px;}
+    input:focus {outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2);}
+    .btn-primary {background: #16a34a; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer;}
+    .jsonbox {background:#0b1020; color:#e5e7eb; padding:12px; border-radius:12px; overflow:auto; max-height:260px; font-family:ui-monospace,monospace; font-size:.85rem; margin-top:12px}
+    .report {margin-top:20px; background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>টিউশন ফি / ফান্ড কালেকশন সিস্টেম</h1><div class="add-form">
+  <h3>নতুন ফি কালেকশন যুক্ত করুন</h3>
+  <form id="feeForm">
+    <label>ছাত্রের নাম <span style="color:red">*</span></label>
+    <input type="text" name="student" required />
+
+    <label>Student ID</label>
+    <input type="text" name="studentId" placeholder="যেমন: SALAFIA-2025-0001" />
+
+    <label>মোট ফি</label>
+    <input type="number" name="totalFee" placeholder="মোট ফি লিখুন" required />
+
+    <label>জমা টাকা</label>
+    <input type="number" name="paid" placeholder="জমা টাকা লিখুন" required />
+
+    <button type="submit" class="btn-primary">সেভ করুন</button>
+  </form>
+</div>
+
+<table id="feeTable">
+  <thead>
+    <tr>
+      <th>ছাত্রের নাম</th>
+      <th>ID</th>
+      <th>মোট ফি</th>
+      <th>জমা</th>
+      <th>বকেয়া</th>
+      <th>একশন</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- ডেটা এখানে আসবে -->
+  </tbody>
+</table>
+
+<div class="report">
+  <h3>সারাংশ রিপোর্ট</h3>
+  <p>মোট কালেকশন: <strong id="totalCollection">0</strong> টাকা</p>
+  <p>মোট বকেয়া: <strong id="totalDue">0</strong> টাকা</p>
+</div>
+
+<h3 style="margin-top:20px">JSON প্রিভিউ</h3>
+<pre id="jsonPreview" class="jsonbox">[]</pre>
+
+  </div>  <script>
+    const form = document.getElementById('feeForm');
+    const tableBody = document.querySelector('#feeTable tbody');
+    const jsonPreview = document.getElementById('jsonPreview');
+    const totalCollectionEl = document.getElementById('totalCollection');
+    const totalDueEl = document.getElementById('totalDue');
+
+    let feeList = JSON.parse(localStorage.getItem('feeList') || '[]');
+
+    function renderTable() {
+      tableBody.innerHTML = '';
+      let totalCollection = 0;
+      let totalDue = 0;
+
+      feeList.forEach((fee, index) => {
+        const due = fee.totalFee - fee.paid;
+        totalCollection += parseFloat(fee.paid);
+        totalDue += parseFloat(due);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${fee.student}</td>
+          <td>${fee.studentId || '-'}</td>
+          <td>${fee.totalFee}</td>
+          <td>${fee.paid}</td>
+          <td>${due}</td>
+          <td class="actions">
+            <button class="btn-delete" onclick="deleteFee(${index})">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      totalCollectionEl.textContent = totalCollection;
+      totalDueEl.textContent = totalDue;
+
+      jsonPreview.textContent = JSON.stringify(feeList, null, 2);
+      localStorage.setItem('feeList', JSON.stringify(feeList));
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.totalFee = parseFloat(data.totalFee);
+      data.paid = parseFloat(data.paid);
+      feeList.push(data);
+      form.reset();
+      renderTable();
+    });
+
+    function deleteFee(index) {
+      if(confirm('আপনি কি নিশ্চিত?')){
+        feeList.splice(index, 1);
+        renderTable();
+      }
+    }
+
+    renderTable();
+  </script></body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>রেজাল্ট ম্যানেজমেন্ট সিস্টেম</title>
+  <style>
+    body {font-family: system-ui, sans-serif; margin: 0; background: #f6f7fb; color: #0f172a;}
+    .container {max-width: 1024px; margin: 32px auto; padding: 0 16px;}
+    h1 {font-size: 1.5rem; margin-bottom: 16px;}
+    table {width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    th, td {padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb;}
+    th {background: #f1f5f9; font-weight: 600; color: #334155;}
+    tr:hover {background: #f9fafb;}
+    .actions {display: flex; gap: 8px;}
+    button {border: 0; border-radius: 8px; padding: 6px 10px; font-size: 0.9rem; cursor: pointer;}
+    .btn-edit {background: #2563eb; color: #fff;}
+    .btn-delete {background: #dc2626; color: #fff;}
+    .add-form {margin: 20px 0; background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    label {display: block; font-size: 0.9rem; color: #475569; margin-bottom: 4px;}
+    input {width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 10px;}
+    input:focus {outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2);}
+    .btn-primary {background: #16a34a; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer;}
+    .jsonbox {background:#0b1020; color:#e5e7eb; padding:12px; border-radius:12px; overflow:auto; max-height:260px; font-family:ui-monospace,monospace; font-size:.85rem; margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>অনলাইন রেজাল্ট ম্যানেজমেন্ট</h1>
+
+    <div class="add-form">
+      <h3>নতুন রেজাল্ট যুক্ত করুন</h3>
+      <form id="resultForm">
+        <label>ছাত্রের নাম <span style="color:red">*</span></label>
+        <input type="text" name="name" required />
+
+        <label>Student ID <span style="color:red">*</span></label>
+        <input type="text" name="studentId" required />
+
+        <label>বাংলা</label>
+        <input type="number" name="bangla" min="0" max="100" required />
+
+        <label>ইংরেজি</label>
+        <input type="number" name="english" min="0" max="100" required />
+
+        <label>গণিত</label>
+        <input type="number" name="math" min="0" max="100" required />
+
+        <label>বিজ্ঞান</label>
+        <input type="number" name="science" min="0" max="100" required />
+
+        <label>ইসলাম শিক্ষা</label>
+        <input type="number" name="islam" min="0" max="100" required />
+
+        <button type="submit" class="btn-primary">সেভ করুন</button>
+      </form>
+    </div>
+
+    <table id="resultTable">
+      <thead>
+        <tr>
+          <th>নাম</th>
+          <th>ID</th>
+          <th>বাংলা</th>
+          <th>ইংরেজি</th>
+          <th>গণিত</th>
+          <th>বিজ্ঞান</th>
+          <th>ইসলাম</th>
+          <th>GPA</th>
+          <th>একশন</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3 style="margin-top:20px">JSON প্রিভিউ</h3>
+    <pre id="jsonPreview" class="jsonbox">[]</pre>
+  </div>
+
+  <script>
+    const form = document.getElementById('resultForm');
+    const tableBody = document.querySelector('#resultTable tbody');
+    const jsonPreview = document.getElementById('jsonPreview');
+
+    let resultList = JSON.parse(localStorage.getItem('resultList') || '[]');
+
+    function gradePoint(marks){
+      if(marks >= 80) return 5.00;
+      if(marks >= 70) return 4.00;
+      if(marks >= 60) return 3.50;
+      if(marks >= 50) return 3.00;
+      if(marks >= 40) return 2.00;
+      return 0.00;
+    }
+
+    function calculateGPA(result){
+      const subjects = ["bangla","english","math","science","islam"];
+      let total = 0;
+      for(const sub of subjects){
+        total += gradePoint(parseInt(result[sub]));
+      }
+      return (total/subjects.length).toFixed(2);
+    }
+
+    function renderTable(){
+      tableBody.innerHTML = '';
+      resultList.forEach((res,index) => {
+        const gpa = calculateGPA(res);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${res.name}</td>
+          <td>${res.studentId}</td>
+          <td>${res.bangla}</td>
+          <td>${res.english}</td>
+          <td>${res.math}</td>
+          <td>${res.science}</td>
+          <td>${res.islam}</td>
+          <td>${gpa}</td>
+          <td class="actions">
+            <button class="btn-edit" onclick="editResult(${index})">Edit</button>
+            <button class="btn-delete" onclick="deleteResult(${index})">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+      jsonPreview.textContent = JSON.stringify(resultList, null, 2);
+      localStorage.setItem('resultList', JSON.stringify(resultList));
+    }
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      resultList.push(data);
+      form.reset();
+      renderTable();
+    });
+
+    function deleteResult(index){
+      if(confirm("আপনি কি নিশ্চিত?")){
+        resultList.splice(index,1);
+        renderTable();
+      }
+    }
+
+    function editResult(index){
+      const res = resultList[index];
+      for(const key in res){
+        if(form[key]) form[key].value = res[key];
+      }
+      deleteResult(index);
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>জামিয়া সালাফিয়া - বোর্ডিং/হোস্টেল হিসাব</title>
+  <style>
+    body {font-family: system-ui, sans-serif; margin: 0; background: #f6f7fb; color: #0f172a;}
+    .container {max-width: 1024px; margin: 32px auto; padding: 0 16px;}
+    h1 {font-size: 1.5rem; margin-bottom: 16px;}
+    table {width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    th, td {padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb;}
+    th {background: #f1f5f9; font-weight: 600; color: #334155;}
+    tr:hover {background: #f9fafb;}
+    .actions {display: flex; gap: 8px;}
+    button {border: 0; border-radius: 8px; padding: 6px 10px; font-size: 0.9rem; cursor: pointer;}
+    .btn-delete {background: #dc2626; color: #fff;}
+    .add-form {margin: 20px 0; background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+    label {display: block; font-size: 0.9rem; color: #475569; margin-bottom: 4px;}
+    input {width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 10px;}
+    input:focus {outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2);}
+    .btn-primary {background: #16a34a; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer;}
+    .jsonbox {background:#0b1020; color:#e5e7eb; padding:12px; border-radius:12px; overflow:auto; max-height:260px; font-family:ui-monospace,monospace; font-size:.85rem; margin-top:12px}
+    .report {margin-top:20px; background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>বোর্ডিং/হোস্টেল হিসাব</h1><div class="add-form">
+  <h3>নতুন বোর্ডিং চার্জ যুক্ত করুন</h3>
+  <form id="boardingForm">
+    <label>ছাত্রের নাম <span style="color:red">*</span></label>
+    <input type="text" name="student" required />
+
+    <label>Student ID</label>
+    <input type="text" name="studentId" placeholder="SALAFIA-2025-0001" />
+
+    <label>মাসিক বোর্ডিং ফি</label>
+    <input type="number" name="monthlyFee" placeholder="মাসিক ফি" required />
+
+    <label>বকেয়া</label>
+    <input type="number" name="due" placeholder="বকেয়া ফি" />
+
+    <label>অতিরিক্ত খরচ (খাবার, বিদ্যুৎ, পানি ইত্যাদি)</label>
+    <input type="number" name="extra" placeholder="অতিরিক্ত খরচ" />
+
+    <button type="submit" class="btn-primary">সেভ করুন</button>
+  </form>
+</div>
+
+<table id="boardingTable">
+  <thead>
+    <tr>
+      <th>নাম</th>
+      <th>ID</th>
+      <th>মাসিক ফি</th>
+      <th>বকেয়া</th>
+      <th>অতিরিক্ত খরচ</th>
+      <th>মোট</th>
+      <th>একশন</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="report">
+  <h3>সারাংশ রিপোর্ট</h3>
+  <p>মোট কালেকশন: <strong id="totalCollection">0</strong> টাকা</p>
+  <p>মোট বকেয়া: <strong id="totalDue">0</strong> টাকা</p>
+</div>
+
+<h3 style="margin-top:20px">JSON প্রিভিউ</h3>
+<pre id="jsonPreview" class="jsonbox">[]</pre>
+
+  </div>  <script>
+    const form = document.getElementById('boardingForm');
+    const tableBody = document.querySelector('#boardingTable tbody');
+    const jsonPreview = document.getElementById('jsonPreview');
+    const totalCollectionEl = document.getElementById('totalCollection');
+    const totalDueEl = document.getElementById('totalDue');
+
+    let boardingList = JSON.parse(localStorage.getItem('boardingList') || '[]');
+
+    function renderTable(){
+      tableBody.innerHTML = '';
+      let totalCollection = 0;
+      let totalDue = 0;
+
+      boardingList.forEach((b,index)=>{
+        const total = parseFloat(b.monthlyFee || 0) + parseFloat(b.extra || 0);
+        totalCollection += total;
+        totalDue += parseFloat(b.due || 0);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${b.student}</td>
+          <td>${b.studentId || '-'}</td>
+          <td>${b.monthlyFee}</td>
+          <td>${b.due || 0}</td>
+          <td>${b.extra || 0}</td>
+          <td>${total}</td>
+          <td class="actions">
+            <button class="btn-delete" onclick="deleteBoarding(${index})">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      totalCollectionEl.textContent = totalCollection;
+      totalDueEl.textContent = totalDue;
+      jsonPreview.textContent = JSON.stringify(boardingList, null, 2);
+      localStorage.setItem('boardingList', JSON.stringify(boardingList));
+    }
+
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      boardingList.push(data);
+      form.reset();
+      renderTable();
+    });
+
+    function deleteBoarding(index){
+      if(confirm('আপনি কি নিশ্চিত?')){
+        boardingList.splice(index,1);
+        renderTable();
+      }
+    }
+
+    renderTable();
+  </script></body>
+</html>
+
+
+
+<!DOCTYPE html><html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জামিয়া সালাফিয়া - ফি ও ফান্ড রিপোর্ট</title>
+<style>
+body {font-family: system-ui, sans-serif; margin: 0; background: #f6f7fb; color: #0f172a;}
+.container {max-width: 1024px; margin: 32px auto; padding: 0 16px;}
+h1 {font-size: 1.5rem; margin-bottom: 16px;}
+table {width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+th, td {padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb;}
+th {background: #f1f5f9; font-weight: 600; color: #334155;}
+tr:hover {background: #f9fafb;}
+.add-form, .report {margin: 20px 0; background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+label {display: block; font-size: 0.9rem; color: #475569; margin-bottom: 4px;}
+input {width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 10px;}
+input:focus {outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2);}
+.btn-primary {background: #16a34a; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer;}
+.jsonbox {background:#0b1020; color:#e5e7eb; padding:12px; border-radius:12px; overflow:auto; max-height:260px; font-family:ui-monospace,monospace; font-size:.85rem; margin-top:12px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>জামিয়া সালাফিয়া - মোট ফি ও ফান্ড রিপোর্ট</h1><div class="add-form">
+<h3>ছাত্র ফি/ফান্ড ইনপুট</h3>
+<form id="fundForm">
+<label>ছাত্রের নাম *</label>
+<input type="text" name="student" required /><label>Student ID</label> <input type="text" name="studentId" placeholder="SALAFIA-2025-0001" />
+
+<label>টিউশন ফি</label> <input type="number" name="tuition" placeholder="টিউশন ফি" required />
+
+<label>বোর্ডিং ফি</label> <input type="number" name="boarding" placeholder="বোর্ডিং ফি" />
+
+<label>অন্যান্য ফান্ড</label> <input type="number" name="other" placeholder="অন্যান্য ফান্ড" />
+
+<label>বকেয়া</label> <input type="number" name="due" placeholder="বকেয়া" />
+
+<button type="submit" class="btn-primary">সেভ করুন</button>
+
+</form>
+</div><table id="fundTable">
+<thead>
+<tr>
+<th>নাম</th>
+<th>ID</th>
+<th>টিউশন</th>
+<th>বোর্ডিং</th>
+<th>অন্যান্য</th>
+<th>মোট</th>
+<th>বকেয়া</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><div class="report">
+<h3>সারাংশ রিপোর্ট</h3>
+<p>মোট কালেকশন: <strong id="totalCollection">0</strong> টাকা</p>
+<p>মোট বকেয়া: <strong id="totalDue">0</strong> টাকা</p>
+</div><h3 style="margin-top:20px">JSON প্রিভিউ</h3>
+<pre id="jsonPreview" class="jsonbox">[]</pre>
+</div><script>
+const form = document.getElementById('fundForm');
+const tableBody = document.querySelector('#fundTable tbody');
+const jsonPreview = document.getElementById('jsonPreview');
+const totalCollectionEl = document.getElementById('totalCollection');
+const totalDueEl = document.getElementById('totalDue');
+
+let fundList = JSON.parse(localStorage.getItem('fundList') || '[]');
+
+function renderTable(){
+  tableBody.innerHTML = '';
+  let totalCollection = 0;
+  let totalDue = 0;
+
+  fundList.forEach(f=>{
+    const total = parseFloat(f.tuition||0)+parseFloat(f.boarding||0)+parseFloat(f.other||0);
+    totalCollection += total;
+    totalDue += parseFloat(f.due||0);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${f.student}</td>
+      <td>${f.studentId||'-'}</td>
+      <td>${f.tuition}</td>
+      <td>${f.boarding||0}</td>
+      <td>${f.other||0}</td>
+      <td>${total}</td>
+      <td>${f.due||0}</td>
+    `;
+    tableBody.appendChild(tr);
+  });
+
+  totalCollectionEl.textContent = totalCollection;
+  totalDueEl.textContent = totalDue;
+  jsonPreview.textContent = JSON.stringify(fundList,null,2);
+  localStorage.setItem('fundList',JSON.stringify(fundList));
+}
+
+form.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form).entries());
+  fundList.push(data);
+  form.reset();
+  renderTable();
+});
+
+renderTable();
+</script></body>
+</html>
